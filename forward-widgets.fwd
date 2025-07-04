@@ -9,7 +9,7 @@
       "description": "获取 Douban 的片单数据",
       "requiredVersion": "0.0.1",
       "version": "1.0.0",
-      "author": "Forward",
+      "author": "Ma",
       "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/doubanList.js"
     }
   ]
