@@ -1,9 +1,9 @@
 WidgetMetadata = {
   id: "forward.Douban",
-  title: "Douban",
+  title: "Douban片單",
   version: "1.0.1",
   requiredVersion: "0.0.1",
-  description: "获取 TMDB 的榜单数据",
+  description: "获取 Douban 的片单数据",
   author: "Ma",
   site: "https://github.com/Joy2009ma1995/ForwardWidgets",
   modules: [
