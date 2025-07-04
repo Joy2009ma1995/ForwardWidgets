@@ -1,16 +1,16 @@
 {
   "title": "Forward Widgets",
-  "description": "Forward Official Widgets",
+  "description": "Ma's Widgets",
   "icon": "https://assets.vvebo.vip/scripts/icon.png",
   "widgets": [
     {
-      "id": "forward.tmdb",
-      "title": "TMDB",
-      "description": "获取 TMDB 的榜单数据",
+      "id": "douban.externalList",
+      "title": "Douban片單",
+      "description": "获取 Douban 的片单数据",
       "requiredVersion": "0.0.1",
       "version": "1.0.0",
       "author": "Forward",
-      "url": "https://assets.vvebo.vip/scripts/tmdb.js"
+      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/doubanList.js"
     }
   ]
 }
