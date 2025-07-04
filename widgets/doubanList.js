@@ -1,165 +1,198 @@
-// ✅ 添加模块定义
-WidgetMetadata ={
-  id: "douban.externalList",
-  title: "外部片单",
-  functionName: "externalList",
-  params: [
+WidgetMetadata = {
+  id: "forward.Douban",
+  title: "Douban",
+  version: "1.0.1",
+  requiredVersion: "0.0.1",
+  description: "获取 TMDB 的榜单数据",
+  author: "Ma",
+  site: "https://github.com/Joy2009ma1995/ForwardWidgets",
+  modules: [
     {
-      name: "source",
-      title: "来源",
-      type: "enumeration",
-      enumOptions: [
-        { title: "IMDb", value: "imdb" },
-        { title: "豆瓣", value: "douban" }
-      ],
-    },
-    {
-      name: "url",
-      title: "片单地址",
-      type: "input",
-      description: "豆瓣片单地址",
-      placeholders: [
+      id: "list",
+      title: "片单",
+      functionName: "list",
+      params: [
         {
-          title: "豆瓣电影片单",
-          value: "https://www.douban.com/doulist/108673/",
-        },
+          name: "url",
+          title: "列表地址",
+          type: "input",
+          description: "Douban 片单地址",
+          placeholders: [
+            {
+              title: "电影学院本科生必看100部",
+              value: "https://www.douban.com/doulist/108673/",
+            }
+          ],
+        }
       ],
     }
-  ]
-}
+  ],
+};
 
-// ✅ 函数入口
-async function externalList(params) {
-  const { source, url } = params;
-  if (source === "imdb") return await parseIMDbList(url);
-  if (source === "douban") return await parseDoubanList(url);
-  throw new Error("未知来源");
-}
+// 基础获取TMDB数据方法
+async function fetchData(api, params, forceMediaType) {
+  try {
+    const response = await Widget.tmdb.get(api, { params: params });
 
-// ✅ IMDb 解析
-async function parseIMDbList(url) {
-  const response = await Widget.http.get(url, {
-    headers: {
-      "User-Agent": "Mozilla/5.0"
+    if (!response) {
+      throw new Error("获取数据失败");
     }
-  });
 
-  const html = response?.data;
-  if (!html) throw new Error("获取 IMDb 页面失败");
-
-  const $ = Widget.html.load(html);
-  const items = $("div.lister-item");
-
-  const imdbIds = [];
-  items.each((_, el) => {
-    const link = $(el).find("h3 a").attr("href");
-    const match = link?.match(/\/title\/(tt\d+)/);
-    if (match) imdbIds.push(match[1]);
-  });
-
-  return await matchIMDbToTMDB(imdbIds);
-}
-
-// ✅ 豆瓣片单解析
-async function parseDoubanList(url) {
-  const response = await Widget.http.get(url, {
-    headers: {
-      "User-Agent": "Mozilla/5.0"
-    }
-  });
-
-  const html = response?.data;
-  if (!html) throw new Error("获取豆瓣页面失败");
-
-  const $ = Widget.html.load(html);
-  const items = $("div.doulist-item");
-
-  const doubanIds = [];
-  items.each((_, el) => {
-    const link = $(el).find("div.title a").attr("href");
-    const match = link?.match(/subject\/(\d+)/);
-    if (match) doubanIds.push(match[1]);
-  });
-
-  return await matchDoubanToTMDB(doubanIds);
-}
-
-// ✅ IMDb → TMDB
-async function matchIMDbToTMDB(imdbIds) {
-  const results = [];
-
-  for (const imdbId of imdbIds) {
-    try {
-      const tmdb = await Widget.tmdb.get(`find/${imdbId}`, {
-        params: {
-          external_source: "imdb_id",
-        },
-      });
-
-      const item = tmdb.movie_results?.[0] || tmdb.tv_results?.[0];
-      if (item) {
-        const type = tmdb.movie_results?.length ? "movie" : "tv";
-        results.push({
-          id: item.id,
-          type: "tmdb",
-          title: item.title || item.name,
-          description: item.overview,
-          releaseDate: item.release_date || item.first_air_date,
-          backdropPath: item.backdrop_path,
-          posterPath: item.poster_path,
-          rating: item.vote_average,
-          mediaType: type,
-        });
+    console.log(response);
+    const data = response.results;
+    const result = data.map((item) => {
+      let mediaType = item.media_type;
+      if (forceMediaType) {
+        mediaType = forceMediaType;
+      } else if (mediaType == null) {
+        if (item.title) {
+          mediaType = "movie";
+        } else {
+          mediaType = "tv";
+        }
       }
-    } catch (e) {
-      console.warn("找不到 IMDb ID:", imdbId);
+      return {
+        id: item.id,
+        type: "tmdb",
+        title: item.title ?? item.name,
+        description: item.overview,
+        releaseDate: item.release_date ?? item.first_air_date,
+        backdropPath: item.backdrop_path,
+        posterPath: item.poster_path,
+        rating: item.vote_average,
+        mediaType: mediaType,
+      };
+    });
+    return result;
+  } catch (error) {
+    console.error("调用 TMDB API 失败:", error);
+    throw error;
+  }
+}
+
+async function nowPlaying(params) {
+  const type = params.type;
+  let api = "tv/on_the_air";
+  if (type === "movie") {
+    api = "movie/now_playing";
+  }
+  return await fetchData(api, params, type);
+}
+
+async function trending(params) {
+  const timeWindow = params.time_window;
+  const api = `trending/all/${timeWindow}`;
+  delete params.time_window;
+  return await fetchData(api, params);
+}
+
+async function popular(params) {
+  const type = params.type;
+  let api = `movie/popular`;
+  if (type === "tv") {
+    api = `tv/popular`;
+  }
+  delete params.type;
+  return await fetchData(api, params, type);
+}
+
+async function topRated(params) {
+  const type = params.type;
+  let api = `movie/top_rated`;
+  if (type === "tv") {
+    api = `tv/top_rated`;
+  }
+  delete params.type;
+  return await fetchData(api, params, type);
+}
+
+async function categories(params) {
+  let genreId = params.with_genres;
+  let type = params.type;
+  const onlyMovieGenreIds = ["28", "53"];//动作，惊悚
+  const onlyTvGenreIds = ["10762", "10764", "10766"];//儿童，真人秀，肥皂剧
+  if (genreId == "878" && type == "tv") {
+    genreId = "10765";
+  }
+  if (onlyMovieGenreIds.includes(genreId)) {
+    type = "movie";
+  }
+  if (onlyTvGenreIds.includes(genreId)) {
+    type = "tv";
+  }
+  const api = `discover/${type}`;
+  params.with_genres = genreId;
+  delete params.type;
+  return await fetchData(api, params, type);
+}
+
+async function networks(params) {
+  let api = `discover/tv`;
+  delete params.type;
+  return await fetchData(api, params);
+}
+
+async function companies(params) {
+  let api = `discover/movie`;
+  delete params.type;
+  return await fetchData(api, params, "movie");
+}
+
+async function list(params = {}) {
+  let url = params.url;
+
+  // append ?view=grid
+  if (!url.includes("view=grid")) {
+    if (url.includes("?")) {
+      url = url + "&view=grid";
+    } else {
+      url = url + "?view=grid";
     }
   }
 
-  return results;
-}
+  console.log("请求片单页面:", url);
+  // 发送请求获取片单页面
+  const response = await Widget.http.get(url, {
+    headers: {
+      Referer: `https://www.themoviedb.org/`,
+      "User-Agent":
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+    },
+  });
 
-// ✅ 豆瓣 → TMDB（通过标题搜索）
-async function matchDoubanToTMDB(doubanIds) {
-  const results = [];
+  if (!response || !response.data) {
+    throw new Error("获取片单数据失败");
+  }
 
-  for (const doubanId of doubanIds) {
-    try {
-      const subjectPage = await Widget.http.get(`https://movie.douban.com/subject/${doubanId}/`, {
-        headers: { "User-Agent": "Mozilla/5.0" }
-      });
 
-      const $ = Widget.html.load(subjectPage.data);
-      const title = $("title").text().split(" (")[0].trim();
-      const yearMatch = subjectPage.data.match(/year">(\d{4})</);
-      const year = yearMatch?.[1];
+  console.log("片单页面数据长度:", response.data.length);
+  console.log("开始解析");
 
-      const searchRes = await Widget.tmdb.get("search/multi", {
-        params: {
-          query: title,
-          year: year,
-          language: "zh-CN",
-        },
-      });
+  // 解析 HTML 得到文档 ID
+  const $ = Widget.html.load(response.data);
+  if (!$ || $ === null) {
+    throw new Error("解析 HTML 失败");
+  }
 
-      const item = searchRes.results?.[0];
-      if (item) {
-        results.push({
-          id: item.id,
-          type: "tmdb",
-          title: item.title || item.name,
-          description: item.overview,
-          releaseDate: item.release_date || item.first_air_date,
-          backdropPath: item.backdrop_path,
-          posterPath: item.poster_path,
-          rating: item.vote_average,
-          mediaType: item.media_type,
-        });
-      }
-    } catch (e) {
-      console.warn("匹配豆瓣失败:", doubanId);
+  //        // 获取所有视频项，得到元素ID数组
+  const coverElements = $(".block.aspect-poster");
+
+  console.log("items:", coverElements);
+
+  let tmdbIds = [];
+  for (const itemId of coverElements) {
+    const $item = $(itemId);
+    const link = $item.attr("href");
+    if (!link) {
+      continue;
+    }
+    const match = link.match(/^\/(movie|tv)\/([^\/-]+)-/)
+    const type = match?.[1];
+    const id = match?.[2];
+    if (id && type) {
+      tmdbIds.push({ id: `${type}.${id}`, type: 'tmdb' });
     }
   }
 
-  return results;
+  return tmdbIds;
 }
