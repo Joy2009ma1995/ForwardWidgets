@@ -30,32 +30,36 @@ var WidgetMetadata = {
 };
 
 async function loadImdbWatchlistItems(params = {}) {
-    try {
-        const page = params.page;
-        const userName = params.user_name || "";
-        let status = params.status || "";
-        const random = status === "random_watchlist";
-        if (random) {
-            status = "watchlist";
-        }
-        const count = 20
-        const size = status === "watchlist" ? 6 : 3
-        const minNum = ((page - 1) % size) * count + 1
-        const maxNum = ((page - 1) % size) * count + 20
-        const traktPage = Math.floor((page - 1) / size) + 1
+  try {
+    const page = params.page || 1;
+    const userId = params.user_id;
+    if (!userId) throw new Error("必须提供 IMDb 用户 ID");
 
-        if (!userName) {
-            throw new Error("必须提供 Trakt 用户名");
-        }
+    const count = 20;
+    const start = (page - 1) * count + 1;
 
-        if (random && page > 1) {
-            return [];
-        }
+    const url = `https://www.imdb.com/user/${userId}/watchlist?start=${start}`;
+    const response = await Widget.http.get(url, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36",
+        "Accept-Language": "en-US,en;q=0.9"
+      }
+    });
 
-        let url = `https://www.imdb.com/user/${userId}/watchlist?start=${start}`;
-        return await fetchTraktData(url, {}, userId, start);
-    } catch (error) {
-        console.error("处理失败:", error);
-        throw error;
-    }
+    const doc = Widget.dom.parse(response.data);
+    const elements = Widget.dom.select(doc, 'div.lister-item');
+
+    const imdbIds = elements.map(el => {
+      const link = Widget.dom.select(el, 'h3.lister-item-header a')[0];
+      const href = link && (Widget.dom.attr(link, 'href') || '');
+      const match = href.match(/\/title\/(tt\d+)/);
+      return match ? { id: match[1], type: "imdb" } : null;
+    }).filter(Boolean);
+
+    return imdbIds;
+  } catch (error) {
+    console.error("IMDb Watchlist 抓取失败:", error);
+    throw error;
+  }
 }
