@@ -8,7 +8,7 @@
       "title": "IMDb watchlist",
       "description": "解析IMDb watchlist",
       "requiredVersion": "0.0.1",
-      "version": "1.0.13",
+      "version": "1.0.0",
       "author": "huangxd",
       "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/IMDb.js"
     },
