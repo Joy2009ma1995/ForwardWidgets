@@ -21,5 +21,14 @@
       "author": "huangxd",
       "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/trakt.js"
     },
+    {
+      "id": "TMDbList",
+      "title": "TMDb 片單",
+      "description": "讀取 TMDb 片單內容",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.4",
+      "author": "Joey",
+      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/TMDBList.js"
+    },
   ]
 }
