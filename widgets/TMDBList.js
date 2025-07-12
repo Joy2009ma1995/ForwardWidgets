@@ -26,10 +26,10 @@ var WidgetMetadata = {
                     type: "string",
                     required: true,
                     placeholder: "你的 TMDb API 金鑰"
-                }
-            ]
-        }
-    ]
+                },
+            ],
+        },
+    ],
 };
 
 async function loadTmdbList(params) {
@@ -38,17 +38,16 @@ async function loadTmdbList(params) {
 
     const response = await fetch(listUrl);
     if (!response.ok) {
-        throw new Error("無法取得 TMDb 清單內容，請確認 list_id 與 API key 是否正確");
+        throw new Error("無法取得 TMDb 清單內容");
     }
 
     const data = await response.json();
     const results = [];
 
-    for (const item of data.items) {
+    for (const item of data.items || []) {
         const tmdbType = item.media_type || (item.first_air_date ? 'tv' : 'movie');
         const tmdbId = item.id;
 
-        // 嘗試取得 IMDb ID
         let imdb_id = null;
         try {
             const externalRes = await fetch(`https://api.themoviedb.org/3/${tmdbType}/${tmdbId}/external_ids?api_key=${api_key}`);
@@ -56,14 +55,14 @@ async function loadTmdbList(params) {
                 const external = await externalRes.json();
                 imdb_id = external.imdb_id || null;
             }
-        } catch (err) {
-            console.warn(`無法取得 ${item.title || item.name} 的 IMDb ID`);
+        } catch (e) {
+            imdb_id = null;
         }
 
         results.push({
-            title: item.title || item.name,
+            title: item.title || item.name || "（無標題）",
             poster: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : null,
-            imdb_id,
+            imdb_id: imdb_id,
             year: (item.release_date || item.first_air_date || "").split("-")[0],
             type: tmdbType
         });
