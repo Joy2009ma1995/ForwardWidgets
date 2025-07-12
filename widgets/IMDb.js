@@ -3,7 +3,7 @@ var WidgetMetadata = {
     title: "IMDb 想看清单",
     version: "1.0.0",
     requiredVersion: "0.0.1",
-    description: "从 IMDb 的 Watchlist 中获取影片数据，可通过 user ID 自动解析",
+    description: "从 IMDb 的 Watchlist 中获取影片数据，仅需填写 user_id 即可自动提取 list_id",
     author: "huangxd",
     site: "https://github.com/huangxd-/ForwardWidgets",
     modules: [
@@ -28,29 +28,38 @@ var WidgetMetadata = {
         }
     ]
 };
-//自动解析 list ID 函数
+
+// 🔁 解析用户 Watchlist 页面，提取真正的 list_id
 async function resolveImdbListIdFromWatchlist(userId) {
     const url = `https://www.imdb.com/user/${userId}/watchlist/`;
     try {
         const response = await Widget.http.get(url, {
-            maxRedirects: 0, // 禁止自动跳转
-            validateStatus: status => status === 302 || status === 301,
+            headers: {
+                "User-Agent": "Mozilla/5.0"
+            }
         });
 
-        const location = response.headers?.location;
-        const match = location?.match(/\/list\/(ls\d+)\//);
+        const doc = Widget.dom.parse(response.data);
+        const linkTags = Widget.dom.select(doc, 'link[rel="canonical"]');
+
+        if (!linkTags || linkTags.length === 0) {
+            throw new Error("未找到 canonical 链接，页面结构可能已更改");
+        }
+
+        const href = Widget.dom.attr(linkTags[0], 'href');
+        const match = href && href.match(/\/list\/(ls\d+)\//);
         if (match) {
             return match[1];
         } else {
-            throw new Error("无法提取 list_id，可能是页面未公开或 IMDb 页面结构更改");
+            throw new Error("无法从 Watchlist 页面解析出 list_id，可能未公开或结构变动");
         }
     } catch (e) {
-        console.error("Watchlist 跳转失败", e);
+        console.error("IMDb Watchlist 页面解析失败", e);
         throw e;
     }
 }
 
-//主数据加载函数
+// 📥 主加载函数：根据 user_id 自动获取 list_id 并拉取影片 IMDb ID 列表
 async function loadImdbWatchlistByUser(params = {}) {
     const userId = params.user_id?.trim();
     const page = params.page || 1;
