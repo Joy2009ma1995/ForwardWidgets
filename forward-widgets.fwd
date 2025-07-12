@@ -30,5 +30,14 @@
       "author": "Joey",
       "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/TMDBList.js"
     },
+    {
+      "id": "TraktListOnly",
+      "title": "Trakt片单",
+      "description": "仅提取 Trakt 用户片单中内容并转换为 IMDb ID",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "huangxd",
+      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/trakt.js"
+    },
   ]
 }
