@@ -4,8 +4,8 @@ var WidgetMetadata = {
     version: "1.0.0",
     requiredVersion: "0.0.1",
     description: "从 IMDb 的 Watchlist 中获取影片数据，仅需填写 user_id 即可自动提取 list_id",
-    author: "huangxd",
-    site: "https://github.com/huangxd-/ForwardWidgets",
+    author: "Joey",
+    site: "https://github.com/Joy2009ma1995/ForwardWidgets",
     modules: [
         {
             title: "IMDb 想看",
