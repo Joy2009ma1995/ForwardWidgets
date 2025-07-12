@@ -98,3 +98,19 @@ async function loadImdbWatchlistByUser(params = {}) {
         throw e;
     }
 }
+const axios = require('axios');
+const cheerio = require('cheerio');
+
+async function resolveImdbListId(userId) {
+    const url = `https://www.imdb.com/user/${userId}/watchlist/`;
+    const response = await axios.get(url, {
+        headers: { "User-Agent": "Mozilla/5.0" }
+    });
+
+    const $ = cheerio.load(response.data);
+    const canonicalHref = $('link[rel="canonical"]').attr('href');
+    const match = canonicalHref?.match(/\/list\/(ls\d+)\//);
+    return match ? match[1] : null;
+}
+
+resolveImdbListId("ur204635540").then(console.log).catch(console.error);
