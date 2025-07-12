@@ -48,5 +48,14 @@
       "author": "Joey",
       "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/Letterboxd.js"
     },
+    {
+      "id": "forward.combined.media.lists",
+      "title": "Forw​​ardWidget豆瓣影视榜单",
+      "description": "基于Forw​​ardWidget架构导入豆瓣影视模块",
+      "requiredVersion": "0.0.1",
+      "version": "1.2.7",
+      "author": "Joey",
+      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/ForwardWidgets.js"
+    },
   ]
 }
