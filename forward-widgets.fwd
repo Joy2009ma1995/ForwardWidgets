@@ -57,5 +57,14 @@
       "author": "Joey",
       "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/ForwardWidgets.js"
     },
+    {
+      "id": "imdb",
+      "title": "IMDB",
+      "description": "IMDB",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "Joey",
+      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widget/IMDb.js"
+    },
   ]
 }
