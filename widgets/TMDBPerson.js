@@ -62,7 +62,11 @@ WidgetMetadata = {
             { title: "杨紫琼", value: "1620" },
             { title: "凯特·布兰切特", value: "112" },
             { title: "丹尼尔·戴·刘易斯", value: "11856" },
-            { title: "宋康昊", value: "20738" }
+            { title: "宋康昊", value: "20738" },
+            { title: "唐嫣", value: "99691" },
+            { title: "谭松韵", value: "1614218" },
+            { title: "杨紫", value: "1696482" },
+            { title: "白鹿", value: "1879666" },
           ]
         },
         { name: "language", title: "语言", type: "language", value: "zh-CN" },
