@@ -28,7 +28,7 @@ WidgetMetadata = {
               value: "https://www.imdb.com/chart/toptv/?ref_=nv_tvv_250",
             },
             { name: "page", title: "页码", type: "page" },
-            { name: "limit", title: "🔢 每页数量", type: "constant", value: "20" }
+            { name: "limit", title: "🔢 每页数量", type: "constant", value: "50" }
           ],
         },
       ],
