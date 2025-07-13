@@ -3,9 +3,9 @@ WidgetMetadata = {
   title: "TMDB人物影视作品",
   version: "1.0.4",
   requiredVersion: "0.0.1",
-  description: "获取 TMDB 个人相关作品数据（Forward 5折优惠码 LUCKY.5)",
-  author: "Evan",
-  site: "https://github.com/EmrysChoo/ForwardWidgets",
+  description: "TMDB 个人相关作品数据",
+  author: "Joey",
+  site: "https://github.com/Joy2009ma1995/ForwardWidgets",
   cacheDuration: 172800,
   modules: [
     {
