@@ -20,9 +20,9 @@ var WidgetMetadata = {
           description: "如：https://letterboxd.com/username/list/list-name/",
           placeholders: [
             {
-              title: "示例片单：Criterion Collection",
-              value: "https://letterboxd.com/davidjenkins/list/the-criterion-collection/",
-            }
+              title: "100 ‘Must Watches’",
+              value: "https://letterboxd.com/rodneyfilm/list/100-must-watches/",
+            },
             { name: "page", title: "页码", type: "page" },
             { name: "limit", title: "🔢 每页数量", type: "constant", value: "50" },
           ],
