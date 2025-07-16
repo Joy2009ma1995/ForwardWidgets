@@ -5,7 +5,7 @@ var WidgetMetadata = {
   requiredVersion: "0.0.1",
   description: "从 Letterboxd 用户的片单中提取影片数据，支持分页与 IMDb ID 输出",
   author: "Joey",
-  site: "https://github.com/Joy2009ma1995/ForwardWidgets",
+  site: "",
   modules: [
     {
       title: "Letterboxd List",
