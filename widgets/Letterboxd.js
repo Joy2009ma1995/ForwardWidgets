@@ -23,13 +23,13 @@ var WidgetMetadata = {
               title: "示例片单：Criterion Collection",
               value: "https://letterboxd.com/davidjenkins/list/the-criterion-collection/",
             }
-          ]
+            { name: "page", title: "页码", type: "page" },
+            { name: "limit", title: "🔢 每页数量", type: "constant", value: "50" },
+          ],
         },
-        { name: "page", title: "页码", type: "page" },
-        { name: "limit", title: "🔢 每页数量", type: "constant", value: "50" }
       ],
-    }
-  ]
+    },
+  ],
 };
 
 // ================== 主函数 ==================
