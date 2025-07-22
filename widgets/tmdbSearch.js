@@ -1,7 +1,7 @@
 var WidgetMetadata = {
-  id: "tmdbSearch",
-  title: "TMDB 搜尋",
-  description: "使用 TMDB API 搜尋電影或影集",
+  id: "tmdbPopular",
+  title: "TMDB 熱門電影",
+  description: "TMDB 熱門電影",
   author: "Joey",                  // 作者
   site: "https://example.com",            // 网站地址
   version: "1.0.0",                       // Widget 版本
