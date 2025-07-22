@@ -24,7 +24,7 @@
     {
       "id": "oscarAwards",
       "title": "奧斯卡獎歷屆名單",
-      "description": "抓取 IMDb 上每年奧斯卡得獎名單",
+      "description": "抓取 Douban 上每年奧斯卡得獎名單",
       "requiredVersion": "0.0.1",
       "version": "1.0.4",
       "author": "Joey",
