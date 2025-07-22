@@ -31,6 +31,15 @@
       "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/tmdbPopularMovie.js"
     },
     {
+      "id": "tmdbUpcoming",
+      "title": "七日內即將上映電影",
+      "description": "列出未來 7 天內即將上映的電影",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.4",
+      "author": "Joey",
+      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/tmdbUpcoming.js"
+    },
+    {
       "id": "TraktListOnly",
       "title": "Trakt片单",
       "description": "仅提取 Trakt 用户片单中内容并转换为 IMDb ID",
