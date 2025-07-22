@@ -1,51 +1,38 @@
 var WidgetMetadata = {
-  id: "tmdbUpcoming",
+  id: "tmdbUpcoming7Days",
   title: "七日內即將上映電影",
   description: "列出未來 7 天內即將上映的電影",
-  author: "Joey",
-  site: "https://example.com",
-  version: "1.0.4",
-  requiredVersion: "0.0.1",
+  author: "由 ChatGPT 協助開發",
+  version: 1,
   modules: [
-  {
-      title: "即將上映（可選天數）",
+    {
+      title: "未來 7 天上映",
       functionName: "getUpcomingMovies",
-      params: [
-        {
-          name: "days",
-          type: "number",
-          title: "天數範圍",
-          default: 7,
-          placeholder: "例如 3 表示列出未來 3 天內上映"
-        }
-  }
+      params: []
+    }
   ]
 };
 
 const API_KEY = "f558fc131f70f86049a00ee67fd1f422";
 
-function isWithinNextXDays(dateStr, days) {
+function isWithinNext7Days(dateStr) {
   if (!dateStr) return false;
   const today = new Date();
   const releaseDate = new Date(dateStr);
   const diff = (releaseDate - today) / (1000 * 60 * 60 * 24);
-  return diff >= 0 && diff <= days;
+  return diff >= 0 && diff <= 7;
 }
 
-async function getUpcomingMovies(params) {
+async function getUpcomingMovies() {
   const lang = "zh-TW";
   const region = "TW";
-  const days = parseInt(params.days || 7, 10); // 預設 7 天
   const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=${lang}&region=${region}`;
 
   const res = await Widget.http.get(url);
   const results = res.data?.results || [];
 
-  // 根據天數過濾
-  const filtered = results.filter(movie => isWithinNextXDays(movie.release_date, days));
-
-  // 依日期排序
-  filtered.sort((a, b) => new Date(a.release_date) - new Date(b.release_date));
+  // 僅保留 7 天內的電影
+  const filtered = results.filter(m => isWithinNext7Days(m.release_date));
 
   return filtered.map(movie => ({
     id: `movie_${movie.id}`,
