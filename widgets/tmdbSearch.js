@@ -2,8 +2,10 @@ var WidgetMetadata = {
   id: "tmdbSearch",
   title: "TMDB 搜尋",
   description: "使用 TMDB API 搜尋電影或影集",
-  author: "由 ChatGPT 協助開發",
-  version: 1,
+  author: "Joey",                  // 作者
+  site: "https://example.com",            // 网站地址
+  version: "1.0.0",                       // Widget 版本
+  requiredVersion: "0.0.1",
   modules: [
     {
       title: "搜尋 TMDB",
