@@ -4,15 +4,6 @@
   "icon": "https://assets.vvebo.vip/scripts/icon.png",
   "widgets": [
     {
-      "id": "IMDbWatchlist",
-      "title": "IMDb watchlist",
-      "description": "解析IMDb watchlist",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.0",
-      "author": "huangxd",
-      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/IMDb.js"
-    },
-    {
       "id": "Trakt",
       "title": "Trakt我看",
       "description": "解析Trakt想看、在看、已看等個人資料",
@@ -40,15 +31,6 @@
       "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/TraktList.js"
     },
     {
-      "id": "Letterboxd",
-      "title": "Letterboxd List/Watchlist",
-      "description": "支持 Letterboxd 用户 Watchlist 或自建 List 的影片提取，可分页或随机抽取 IMDb ID。",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.0",
-      "author": "Joey",
-      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/Letterboxd.js"
-    },
-    {
       "id": "forward.combined.media.lists",
       "title": "Forw​​ardWidget豆瓣影视榜单",
       "description": "基于Forw​​ardWidget架构导入豆瓣影视模块",
@@ -56,15 +38,6 @@
       "version": "1.2.7",
       "author": "Joey",
       "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/ForwardWidgets.js"
-    },
-    {
-      "id": "imdb",
-      "title": "IMDB",
-      "description": "IMDB",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.0",
-      "author": "Joey",
-      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/IMDbList.js"
     },
   ]
 }
