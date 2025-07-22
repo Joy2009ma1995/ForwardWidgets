@@ -1,9 +1,11 @@
 var WidgetMetadata = {
-  id: "tmdbUpcoming7Days",
+  id: "tmdbUpcoming",
   title: "七日內即將上映電影",
   description: "列出未來 7 天內即將上映的電影",
-  author: "由 ChatGPT 協助開發",
-  version: 1,
+  author: "Joey",
+  site: "https://example.com",
+  version: "1.0.1",
+  requiredVersion: "0.0.1",
   modules: [
     {
       title: "未來 7 天上映",
