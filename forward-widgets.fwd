@@ -22,13 +22,13 @@
       "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/trakt.js"
     },
     {
-      "id": "TMDbList",
-      "title": "TMDb 片單",
-      "description": "讀取 TMDb 片單內容",
+      "id": "tmdbSearch",
+      "title": "TMDB 搜尋",
+      "description": "使用 TMDB API 搜尋電影或影集",
       "requiredVersion": "0.0.1",
       "version": "1.0.4",
       "author": "Joey",
-      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/TMDBList.js"
+      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/tmdbSearch.js"
     },
     {
       "id": "TraktListOnly",
