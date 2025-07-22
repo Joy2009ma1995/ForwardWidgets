@@ -1,7 +1,7 @@
 var WidgetMetadata = {
   id: "tmdbPopularMovie",
-  title: "TMDB 熱門電影（可指定年份）",
-  description: "使用地區參數查詢T最熱門的電影",
+  title: "TMDB 熱門電影（可指定年份+地區）",
+  description: "使用地區&年份參數查詢最熱門的電影",
   author: "Joey",
   site: "https://example.com",
   version: "1.0.1",
@@ -17,6 +17,13 @@ var WidgetMetadata = {
           type: "input",
           default: "TW",
           placeholder: "例如 TW, US, JP"
+        },
+        {
+          name: "year",
+          title: "上映年份",
+          type: "input",
+          default: "",
+          placeholder: "例如 2023（可留空）"
         }
       ]
     }
@@ -25,10 +32,22 @@ var WidgetMetadata = {
 
 const API_KEY = "f558fc131f70f86049a00ee67fd1f422";
 
-async function getPopularMovies({ region = "TW" }) {
+async function getPopularMovies({ region = "TW", year = "" }) {
   const lang = "zh-TW";
-  const url = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=${lang}&region=${region}`;
+  const baseUrl = `https://api.themoviedb.org/3/discover/movie`;
+  const params = new URLSearchParams({
+    api_key: API_KEY,
+    language: lang,
+    region: region,
+    sort_by: "popularity.desc",
+    page: "1"
+  });
 
+  if (year) {
+    params.append("primary_release_year", year); // 篩選年份
+  }
+
+  const url = `${baseUrl}?${params.toString()}`;
   const res = await Widget.http.get(url);
   const results = res.data?.results || [];
 
