@@ -17,27 +17,9 @@
       "title": "TMDB 熱門電影",
       "description": "TMDB 熱門電影",
       "requiredVersion": "0.0.1",
-      "version": "1.0.4",
+      "version": "1.0.0",
       "author": "Joey",
       "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/tmdbSearch.js"
-    },
-    {
-      "id": "tmdbPopularMovie",
-      "title": "TMDB 熱門電影（可指定年份+地區）",
-      "description": "使用地區&年份參數查詢最熱門的電影",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.4",
-      "author": "Joey",
-      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/tmdbPopularMovie.js"
-    },
-    {
-      "id": "tmdbUpcoming",
-      "title": "七日內即將上映電影",
-      "description": "列出未來 7 天內即將上映的電影",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.4",
-      "author": "Joey",
-      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/tmdbUpcoming.js"
     },
     {
       "id": "oscarAwards",
