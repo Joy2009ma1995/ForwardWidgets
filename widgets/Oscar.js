@@ -2,7 +2,7 @@ var WidgetMetadata = {
   id: "oscarAwards",
   title: "奧斯卡獎歷屆名單",
   description: "抓取 IMDb 上每年奧斯卡得獎名單",
-  author: "你自己",
+  author: "Joey",
   site: "https://www.imdb.com/event/ev0000003/",
   version: "1.0.0",
   requiredVersion: "0.0.1",
