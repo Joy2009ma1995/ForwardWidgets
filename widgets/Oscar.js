@@ -1,55 +1,59 @@
 var WidgetMetadata = {
   id: "oscarAwards",
   title: "奧斯卡獎歷屆名單",
-  description: "抓取 IMDb 上每年奧斯卡得獎名單",
+  description: "抓取 Douban 上每年奧斯卡得獎名單",
   author: "Joey",
   site: "https://www.imdb.com/event/ev0000003/",
   version: "1.0.0",
   requiredVersion: "0.0.1",
   modules: [
     {
-      id: "oscarYear",
-      title: "奧斯卡得獎名單",
-      functionName: "loadOscarWinners",
+      id: "oscarsByYear",
+      title: "年份查詢",
+      description: "輸入屆數抓取該年獎項",
       params: [
         {
-          name: "year",
+          name: "edition",
           type: "input",
-          title: "年份",
-          default: "2025",
-          description: "例如輸入 2024"
+          title: "屆數",
+          default: "96",
+          description: "第幾屆奧斯卡（如 96 表示2024年）"
         }
-      ]
+      ],
+      functionName: "loadOscarByDouban"
     }
   ]
 };
 
-async function loadOscarWinners({ year }) {
-  const url = `https://www.imdb.com/event/ev0000003/${year}/1`;
+async function loadOscarByDouban({ edition }) {
+  const url = `https://movie.douban.com/awards/oscar/${edition}/`;
   const html = await fetchText(url);
-  return parseOscarHTML(html);
+  return parseDoubanOscarHTML(html, edition);
 }
 
-function parseOscarHTML(html) {
+function parseDoubanOscarHTML(html, edition) {
   const $ = cheerio.load(html);
   const items = [];
 
-  $(".event-widgets__award").each((_, section) => {
-    const category = $(section).find(".event-widgets__award-name").text().trim();
-    const winner = $(section).find(".event-widgets__award-winner .ipc-metadata-list-summary-item");
+  $(".award").each((_, awardBlock) => {
+    const category = $(awardBlock).find("h2").text().trim();
+    const li = $(awardBlock).find("ul > li");
 
-    winner.each((_, item) => {
-      const href = $(item).find("a.ipc-metadata-list-summary-item__t").attr("href") || "";
-      const idMatch = href.match(/\/title\/(tt\d+)/);
-      const id = idMatch ? idMatch[1] : null;
-      const title = $(item).find("a.ipc-metadata-list-summary-item__t").text().trim();
+    li.each((i, el) => {
+      const a = $(el).find("a");
+      const title = a.text().trim();
+      const href = a.attr("href") || "";
+      const idMatch = href.match(/subject\/(\d+)/);
+      const id = idMatch?.[1];
 
       if (id && title) {
         items.push({
           id,
           title,
           category,
-          type: "movie"
+          type: "movie",
+          award: i === 0 ? "winner" : "nominee",
+          edition: parseInt(edition)
         });
       }
     });
