@@ -22,6 +22,15 @@
       "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/tmdbSearch.js"
     },
     {
+      "id": "tmdbPopularMovie",
+      "title": "TMDB 熱門電影（可指定年份）",
+      "description": "使用 TMDB Discover API 查詢特定年份最熱門的電影",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.4",
+      "author": "Joey",
+      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/tmdbSearch.js"
+    },
+    {
       "id": "TraktListOnly",
       "title": "Trakt片单",
       "description": "仅提取 Trakt 用户片单中内容并转换为 IMDb ID",
