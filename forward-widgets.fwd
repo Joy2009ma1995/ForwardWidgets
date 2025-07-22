@@ -24,7 +24,7 @@
     {
       "id": "tmdbPopularMovie",
       "title": "TMDB 熱門電影（可指定年份）",
-      "description": "使用 TMDB Discover API 查詢特定年份最熱門的電影",
+      "description": "使用地區參數查詢T最熱門的電影",
       "requiredVersion": "0.0.1",
       "version": "1.0.4",
       "author": "Joey",
