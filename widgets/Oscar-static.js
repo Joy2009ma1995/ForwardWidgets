@@ -5,13 +5,32 @@ WidgetMetadata = {
     requiredVersion: "0.0.1",
     description: "旨在鼓勵過去一年間優秀電影創作、發展獎勵活動，不僅是美國電影業界年度最重要活動，亦是目前最受世界矚目的電影獎之一。",
     author: "Joey",
-    modules: [{
-        id: "Oscar",
-        title: "Academy Award of Merit(Oscar)",
-        functionName: "getCollections",
-        cacheDuration: 3600,
-        params: []
-    }]
+    modules: [
+    {
+      id: "best_picture_static",
+      title: "最佳影片",
+      description: "奧斯卡歷年最佳影片得獎名單",
+      functionName: "loadOscarByCategory",
+      args: { category: "最佳影片" },
+      requiresWebView: false
+    },
+    {
+      id: "best_director_static",
+      title: "最佳導演",
+      description: "奧斯卡歷年最佳導演得獎名單",
+      functionName: "loadOscarByCategory",
+      args: { category: "最佳導演" },
+      requiresWebView: false
+    },
+    {
+      id: "best_actor_static",
+      title: "最佳男主角",
+      description: "奧斯卡歷年最佳男主角得獎名單",
+      functionName: "loadOscarByCategory",
+      args: { category: "最佳男主角" },
+      requiresWebView: false
+    }
+  ]
 };
 
 const Oscar_STATIC = [
@@ -888,6 +907,22 @@ const Oscar_STATIC = [
     "poster_path": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/2dNtTwMvoMGtISS2cTrMB8woqUy.jpg",
     "category": "最佳影片"
     },
+    {
+        title: "Frank Borzage",
+        title_zh: "法蘭克·鮑札吉",
+        year: 1927,
+        tmdbID: null,
+        poster_path: null,
+        category: "最佳導演"
+    },
+    {
+        title: "Emil Jannings",
+        title_zh: "艾米爾·簡寧斯",
+        year: 1927,
+        tmdbID: null,
+        poster_path: null,
+        category: "最佳男主角"
+    }
 ];
 
 async function getCollections(params = {}) {
@@ -897,3 +932,15 @@ async function getCollections(params = {}) {
 function getRandomArray(arr) {
     return arr.slice().sort(() => Math.random() - 0.5);
 }
+async function loadOscarByCategory(params) {
+  var category = params?.category || "最佳影片";
+  return Oscar_STATIC.filter(item => item.category === category).map(item => ({
+    id: item.tmdbID || item.title,
+    title: item.title,
+    title_zh: item.title_zh,
+    year: item.year,
+    poster_path: item.poster_path,
+    type: "movie"
+  }));
+}
+
