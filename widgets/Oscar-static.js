@@ -26,7 +26,7 @@ const Oscar_STATIC = [
     "category": "最佳影片"
     },
     {
-    "title_zh": "百老汇旋律",
+    "title": "百老汇旋律",
     "type": "tmdb",
     "year": 1930,
     "tmdbID": 60882,
@@ -35,7 +35,7 @@ const Oscar_STATIC = [
     "category": "最佳影片"
     },
     {
-    "title_zh": "奥本海默",
+    "title": "奥本海默",
     "type": "tmdb",
     "year": 2024,
     "tmdbID": 872585,
