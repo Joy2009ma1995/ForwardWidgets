@@ -19,19 +19,20 @@ const Oscar_STATIC = [
     "title": "鐵翼雄風",
     "type": "tmdb",
     "year": 1929,
-    "tmdbID": 339847,
+    "tmdbID": 28966,
     "mediaType": "movie",
     "posterPath": "/zT0GvVwLtPS6LaNz4mrb25XHOe3.jpg",
     "backdropPath": "/ygmmnABINfDXQzNgeZdZmmm884E.jpg",
     "category": "最佳影片"
     },
     {
-    "title": "百老汇旋律",
+    "title": "紅伶秘史",
     "type": "tmdb",
     "year": 1930,
-    "tmdbID": 60882,
+    "tmdbID": 65203,
     "mediaType": "movie",
-    "posterPath": "https://image.tmdb.org/t/p/w500/nDg3fWjJhp0dfBFxyQANfNZy9GL.jpg",
+    "posterPath": "/giq8GJs8YGMzHxeKxNSuwzAdd1c.jpg",
+    "backdropPath": "/pfw7cOdBc2PBkgmxIm7KJ4hbFbo.jpg",
     "category": "最佳影片"
     },
     {
