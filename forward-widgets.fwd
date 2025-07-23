@@ -49,13 +49,13 @@
       "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/Oscar-static.js"
     },
     {
-      "id": "TraktListOnly",
-      "title": "Trakt片单",
+      "id": "trending",
+      "title": "Trending",
       "description": "仅提取 Trakt 用户片单中内容并转换为 IMDb ID",
       "requiredVersion": "0.0.1",
       "version": "1.0.0",
-      "author": "huangxd",
-      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/TraktList.js"
+      "author": "Joey",
+      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/traktTrending.js"
     },
     {
       "id": "forward.combined.media.lists",
