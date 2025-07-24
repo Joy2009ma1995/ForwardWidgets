@@ -1,27 +1,21 @@
 var WidgetMetadata = {
-  id: "tmdbPopularTV",
+  id: "tmdbPopularSeries",
   title: "TMDB 熱門劇集",
-  description: "TMDB 熱門劇集",
+  description: "支援多頁面的 TMDB 熱門劇集列表",
   author: "Joey",
   site: "https://example.com",
-  version: "1.0.0",
+  version: "1.0.1",
   requiredVersion: "0.0.1",
   modules: [
     {
       title: "熱門劇集",
-      functionName: "getPopularTVShows",
+      functionName: "getPopularSeries",
       params: [
         {
-          name: "page",
-          title: "頁碼",
+          name: "pages",
           type: "number",
-          default: 1
-        },
-        {
-          name: "language",
-          title: "語言（如 zh-TW, en-US）",
-          type: "input",
-          default: "zh-TW"
+          default: 1,
+          description: "要抓取的頁數，預設 1 頁"
         }
       ]
     }
@@ -30,60 +24,32 @@ var WidgetMetadata = {
 
 const API_KEY = "f558fc131f70f86049a00ee67fd1f422";
 
-async function getPopularTVShows(params = {}) {
-  const lang = params.language || "zh-TW";
-  const page = params.page || 1;
-
-  const url = `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=${lang}&page=${page}`;
-  const res = await Widget.http.get(url);
-  const results = res.data?.results || [];
-
-  return results.map(tv => ({
-    id: `tv_${tv.id}`,
-    type: "link",
-    title: tv.name || "未命名",
-    description: tv.overview || "（無簡介）",
-    releaseDate: tv.first_air_date || "",
-    posterPath: tv.poster_path
-      ? `https://image.tmdb.org/t/p/w500${tv.poster_path}`
-      : "",
-    backdropPath: tv.backdrop_path
-      ? `https://image.tmdb.org/t/p/w780${tv.backdrop_path}`
-      : "",
-    rating: tv.vote_average || 0,
-    link: `tv_${tv.id}`
-  }));
-}
-
-async function loadDetail(link) {
-  const [type, id] = link.split("_");
+/**
+ * 取得 TMDB 熱門劇集，支援多頁面
+ * @param {{ pages: number }} options
+ */
+async function getPopularSeries({ pages }) {
   const lang = "zh-TW";
+  const allResults = [];
 
-  const detailUrl = `https://api.themoviedb.org/3/${type}/${id}?api_key=${API_KEY}&language=${lang}`;
-  const videoUrl = `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${API_KEY}&language=${lang}`;
+  // 限制最多抓取 5 頁，避免過多請求
+  const maxPages = Math.min(pages, 15);
+  for (let page = 1; page <= maxPages; page++) {
+    const url = `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&language=${lang}&page=${page}`;
+    const res = await Widget.http.get(url);
+    const results = res.data?.results || [];
+    allResults.push(...results);
+  }
 
-  const [detailRes, videoRes] = await Promise.all([
-    Widget.http.get(detailUrl),
-    Widget.http.get(videoUrl)
-  ]);
-
-  const detail = detailRes.data || {};
-  const videos = videoRes.data?.results || [];
-
-  const trailer = videos.find(v => v.type === "Trailer" && v.site === "YouTube");
-
-  return {
-    title: detail.name || "未命名",
-    description: detail.overview || "無簡介",
-    videoUrl: trailer ? `https://www.youtube.com/watch?v=${trailer.key}` : "",
-    posterPath: detail.poster_path
-      ? `https://image.tmdb.org/t/p/w500${detail.poster_path}`
-      : "",
-    backdropPath: detail.backdrop_path
-      ? `https://image.tmdb.org/t/p/w780${detail.backdrop_path}`
-      : "",
-    rating: detail.vote_average || 0,
-    releaseDate: detail.first_air_date || "",
-    link: detail.homepage || `https://www.themoviedb.org/${type}/${id}`
-  };
+  return allResults.map(series => ({
+    id: `tv_${series.id}`,
+    type: "series",
+    title: series.name,
+    description: series.overview,
+    poster: `https://www.themoviedb.org/t/p/w500${series.poster_path}`,
+    release_date: series.first_air_date,
+    rating: series.vote_average,
+    language: series.original_language,
+    genres: series.genre_ids.join(", ")
+  }));
 }
