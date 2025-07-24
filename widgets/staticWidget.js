@@ -1,57 +1,39 @@
-// 靜態生成的 ForwardWidget 模塊示例
 var WidgetMetadata = {
   id: "staticWidget",
-  title: "靜態 ForwardWidget 模塊",
-  description: "使用靜態數據生成的 ForwardWidget 範例",
-  author: "Joey",
-  site: "https://example.com",
-  version: "1.0.0",
+  title: "靜態電影或劇集模塊",
+  description: "靜態展示電影或劇集資訊",
+  author: "Joey",                 // 作者
+  site: "https://example.com",    // 網站地址
+  version: "1.0.0",              // Widget 版本
   requiredVersion: "0.0.1",
   modules: [
     {
-      title: "靜態數據列表",
-      functionName: "getStaticData",
-      params: []
+      title: "靜態內容",
+      functionName: "getStaticContent",
+      params: [] // 不需要參數
     }
   ]
 };
 
-// 在此定義所有靜態項目
-const STATIC_DATA = [
-  {
-    id: "item_1",
-    type: "link",
-    title: "範例連結一",
-    image: "https://example.com/image1.jpg",
-    desc: "這是一個靜態生成的示例項目。"
-  },
-  {
-    id: "item_2",
-    type: "link",
-    title: "範例連結二",
-    image: "https://example.com/image2.jpg",
-    desc: "第二個示例項目。"
-  }
-  // 如需更多項目，可在此添加
-];
+async function getStaticContent() {
+  // 靜態數據
+  const staticData = [
+    {
+      id: "749170",
+      type:"tmdb",
+      title: "國家元首",
+      description:"英國首相與美國總統之間的私人恩怨危及兩國關係。然而兩人被強大的敵人鎖定，被迫相依為命，踏上瘋狂的跨國逃亡之旅。在軍情六處菁英幹員諾兒的幫助下，兩國元首必須設法打擊威脅自由世界的巨大陰謀。",
+      releaseDate:"2025/07/02",
+      backropPath:"/vJbEUMeI2AxBUZKjP6ZVeVNNTLh.jpg",
+      posterPath: "/gsp6imDEkBtJV0BZ1HMdEcG9UH7.jpg",
+      mediatype: "movie"
+    }
+  ];
 
-/**
- * 返回靜態數據
- * @returns {Array<Object>} 靜態項目列表
- */
-async function getStaticData() {
-  // 若有需要，可在此過濾、排序或轉換 STATIC_DATA
-  return STATIC_DATA;
-}
-
-// 與 ForwardWidget 平台整合：
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = {
-    WidgetMetadata,
-    getStaticData
-  };
-} else {
-  // 瀏覽器環境下暴露到全域變數
-  window.WidgetMetadata = WidgetMetadata;
-  window.getStaticData = getStaticData;
+  return staticData.map(item => ({
+    id: item.id,
+    title: item.title,
+    image: item.poster,
+    type: item.type
+  }));
 }
