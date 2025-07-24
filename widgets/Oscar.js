@@ -1,6 +1,6 @@
 WidgetMetadata = {
-    id: "Letterboxd",
-    title: "Letterboxd片單-奧斯卡",
+    id: "oscarAwards",
+    title: "奧斯卡獎歷屆名單",
     modules: [
         {
             id: "letterboxdList",
@@ -367,7 +367,7 @@ WidgetMetadata = {
     ],
     version: "1.0.0",
     requiredVersion: "0.0.1",
-    description: "解析Letterboxd片单内的影片",
+    description: "解析Letterboxd片单内的利届奥斯卡获奖名单",
     author: "Joy",
     site: "https://github.com/Ma98hao04hsin15/ForwardWidgets"
 };
