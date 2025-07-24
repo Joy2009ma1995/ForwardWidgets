@@ -33,7 +33,7 @@
     {
       "id": "oscarAwards",
       "title": "奧斯卡獎歷屆名單",
-      "description": "解析Letterboxd片单内的利届奥斯卡获奖名单",
+      "description": "解析Letterboxd片单内的历届奥斯卡获奖名单",
       "requiredVersion": "0.0.1",
       "version": "1.0.4",
       "author": "Joey",
