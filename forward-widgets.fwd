@@ -31,6 +31,15 @@
       "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/tmdbPopularSeries.js"
     },
     {
+      "id": "staticWidget",
+      "title": "靜態 ForwardWidget 模塊",
+      "description": "使用靜態數據生成的 ForwardWidget 範例",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "Joey",
+      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/staticWidget.js"
+    },
+    {
       "id": "forward.combined.media.lists",
       "title": "影视榜单",
       "description": "影视动画榜单",
