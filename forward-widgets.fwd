@@ -24,47 +24,11 @@
     {
       "id": "oscarAwards",
       "title": "奧斯卡獎歷屆名單",
-      "description": "抓取 Douban 上每年奧斯卡得獎名單",
+      "description": "解析Letterboxd片单内的利届奥斯卡获奖名单",
       "requiredVersion": "0.0.1",
       "version": "1.0.4",
       "author": "Joey",
       "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/Oscar.js"
-    },
-    {
-      "id": "IMDbList",
-      "title": "IMDb 片单",
-      "description": "从 IMDb 的 List 中获取影片数据",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.4",
-      "author": "Joey",
-      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/IMDb.js"
-    },
-    {
-      "id": "Oscar",
-      "title": "Academy Award of Merit",
-      "description": "旨在鼓勵過去一年間優秀電影創作、發展獎勵活動，不僅是美國電影業界年度最重要活動，亦是目前最受世界矚目的電影獎之一。",
-      "requiredVersion": "0.0.1",
-      "version": "1.2.3",
-      "author": "Joey",
-      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/Oscar-static.js"
-    },
-    {
-      "id": "trending",
-      "title": "Trending",
-      "description": "仅提取 Trakt 用户片单中内容并转换为 IMDb ID",
-      "requiredVersion": "0.0.1",
-      "version": "1.0.0",
-      "author": "Joey",
-      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/traktTrending.js"
-    },
-    {
-      "id": "forward.combined.media.lists",
-      "title": "Forw​​ardWidget豆瓣影视榜单",
-      "description": "基于Forw​​ardWidget架构导入豆瓣影视模块",
-      "requiredVersion": "0.0.1",
-      "version": "1.2.7",
-      "author": "Joey",
-      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/ForwardWidgets.js"
     },
   ]
 }
