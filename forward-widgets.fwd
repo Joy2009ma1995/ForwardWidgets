@@ -31,6 +31,15 @@
       "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/tmdbPopularSeries.js"
     },
     {
+      "id": "forward.combined.media.lists",
+      "title": "影视榜单",
+      "description": "影视动画榜单",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.0",
+      "author": "阿米诺斯",
+      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/tmdbSearch.js"
+    },
+    {
       "id": "oscarAwards",
       "title": "奧斯卡獎歷屆名單",
       "description": "解析Letterboxd片单内的历届奥斯卡获奖名单",
