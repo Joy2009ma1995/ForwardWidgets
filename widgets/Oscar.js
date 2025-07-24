@@ -367,7 +367,7 @@ WidgetMetadata = {
     ],
     version: "1.0.0",
     requiredVersion: "0.0.1",
-    description: "解析Letterboxd片单内的利届奥斯卡获奖名单",
+    description: "解析Letterboxd片单内的历届奥斯卡获奖名单",
     author: "Joy",
     site: "https://github.com/Ma98hao04hsin15/ForwardWidgets"
 };
