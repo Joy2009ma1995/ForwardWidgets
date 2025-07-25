@@ -26,7 +26,7 @@ var WidgetMetadata = {
   ]
 };
 
-const TMDB_KEY = "你的TMDB_API_KEY";
+const TMDB_KEY = "f558fc131f70f86049a00ee67fd1f422";
 const CACHE_TTL = 60 * 30; // 30分鐘快取
 
 // 影集 - Airing Today + Upcoming
