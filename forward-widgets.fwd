@@ -39,5 +39,14 @@
       "author": "Joey",
       "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/Oscar.js"
     },
+    {
+      "id": "imdbPopularTV",
+      "title": "IMDb 熱門劇集",
+      "description": "IMDb 熱門劇集",
+      "requiredVersion": "0.0.1",
+      "version": "1.0.3",
+      "author": "Joey",
+      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/imdbPopularTV.js"
+    },
   ]
 }
