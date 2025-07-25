@@ -18,7 +18,7 @@ var WidgetMetadata = {
   ]
 };
 
-const TMDB_API_KEY = "你的TMDB_API_KEY";
+const TMDB_API_KEY = "f558fc131f70f86049a00ee67fd1f422";
 const CACHE_KEY = "imdb_popular_tv_cache";
 const CACHE_DURATION = 6 * 60 * 60 * 1000; // 6 小時
 
