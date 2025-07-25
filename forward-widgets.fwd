@@ -40,13 +40,13 @@
       "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/Oscar.js"
     },
     {
-      "id": "traktCalendarStatic",
-      "title": "Trakt 靜態日曆",
-      "description": "靜態 Trakt Calendar",
+      "id": "TraktCalendar",
+      "title": "TMDB + Trakt 日曆",
+      "description": "顯示即將播出的影集或電影",
       "requiredVersion": "0.0.1",
       "version": "1.0.0",
       "author": "Joey",
-      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/traktCalendarStatic.js"
+      "url": "https://raw.githubusercontent.com/Joy2009ma1995/ForwardWidgets/refs/heads/main/widgets/traktCalendar.js"
     },
   ]
 }
